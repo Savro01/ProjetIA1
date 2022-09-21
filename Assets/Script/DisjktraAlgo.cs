@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class disjktraAlgo : MonoBehaviour
+public class DisjktraAlgo : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,4 +15,48 @@ public class disjktraAlgo : MonoBehaviour
     {
         
     }
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
