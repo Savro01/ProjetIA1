@@ -15,6 +15,7 @@ public class AstarPathfinding : MonoBehaviour
     private void Update()
     {
         FindPath(seeker.position, target.position);
+        //FindPath(seeker2.position, target.position);
     }
 
     void FindPath(Vector3 startPos, Vector3 targetPos)
@@ -86,8 +87,8 @@ public class AstarPathfinding : MonoBehaviour
 
     int GetDistance(Noeud nodeA, Noeud nodeB)
     {
-        int dstX = Mathf.Abs(nodeA.gridX - nodeB.gridY);
-        int dstY = Mathf.Abs(nodeA.gridX - nodeB.gridY);
+        int dstX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
+        int dstY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
 
         if(dstX > dstY)
         {
