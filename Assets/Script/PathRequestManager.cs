@@ -10,12 +10,15 @@ public class PathRequestManager : MonoBehaviour
 
     static PathRequestManager instance;
     AstarPathfinding astarPathfinding;
+    DisjktraPathfinding disjktraPathfinding;
+    
 
     bool isProcessingPath;
 
     void Awake(){
         instance = this;
         astarPathfinding = GetComponent<AstarPathfinding>();
+        disjktraPathfinding = GetComponent<DisjktraPathfinding>();
     }
 
     public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback){
@@ -28,7 +31,17 @@ public class PathRequestManager : MonoBehaviour
         if(!isProcessingPath && pathRequestQueue.Count > 0){
             currentPathRequest = pathRequestQueue.Dequeue();
             isProcessingPath = true;
-            astarPathfinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd);
+            if (disjktraPathfinding.active)
+            {
+                Debug.Log("Disjktra");
+                disjktraPathfinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd);
+            }
+            else
+            {
+                Debug.Log("Astar");
+                astarPathfinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd);
+            }
+
         }
     }    
 

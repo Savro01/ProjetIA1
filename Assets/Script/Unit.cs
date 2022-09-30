@@ -31,6 +31,7 @@ public class Unit : MonoBehaviour
     }
 
     IEnumerator FollowPath() {
+        Debug.Log(path);
         Vector3 currentWaypoint = path[0];
 
         while(true){
