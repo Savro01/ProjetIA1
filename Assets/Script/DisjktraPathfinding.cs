@@ -35,13 +35,14 @@ public class DisjktraPathfinding : MonoBehaviour
             HashSet<Noeud> closeSet = new HashSet<Noeud>();
 
             openSet.Add(startNode);
+            startNode.distance = 0;
 
             while (openSet.Count > 0)
             {
                 Noeud currentNode = openSet[0];
                 for (int i = 1; i < openSet.Count; i++)
                 {
-                    if (openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost)
+                    if (openSet[i].distance < currentNode.distance)
                     {
                         currentNode = openSet[i];
                     }
@@ -52,7 +53,6 @@ public class DisjktraPathfinding : MonoBehaviour
                 if (currentNode == targetNode)
                 {
                     pathSucces = true;
-                    //RetracePath(startNode, targetNode);
                 }
 
                 foreach (Noeud neighbour in grid.getNeighbourgs(currentNode))
@@ -62,11 +62,10 @@ public class DisjktraPathfinding : MonoBehaviour
                         continue;
                     }
 
-                    int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
-                    if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
+                    int newMovementCostToNeighbour = currentNode.distance + GetDistance(currentNode, neighbour);
+                    if (newMovementCostToNeighbour < neighbour.distance || !openSet.Contains(neighbour))
                     {
-                        neighbour.gCost = newMovementCostToNeighbour;
-                        neighbour.hCost = GetDistance(neighbour, targetNode);
+                        neighbour.distance = newMovementCostToNeighbour;
                         neighbour.parent = currentNode;
 
                         if (!openSet.Contains(neighbour))
