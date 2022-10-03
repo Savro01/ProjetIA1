@@ -12,10 +12,11 @@ public class Unit : MonoBehaviour
     float timer = 0;
 
     void Update(){
-        if (timer <= 2f)
+        float time = 0.05f;
+        if (timer <= time)
             timer += Time.deltaTime;
 
-        if (timer > 2f)
+        if (timer > time)
         {
             PathRequestManager.RequestPath(transform.position, target.position, onPathFound);
             timer = 0;

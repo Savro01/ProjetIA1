@@ -40,21 +40,6 @@ public class DisjktraPathfinding : MonoBehaviour
             while (openSet.Count > 0)
             {
                 Noeud currentNode = openSet[0];
-                for (int i = 1; i < openSet.Count; i++)
-                {
-                    if (openSet[i].distance < currentNode.distance)
-                    {
-                        currentNode = openSet[i];
-                    }
-                }
-                openSet.Remove(currentNode);
-                closeSet.Add(currentNode);
-
-                if (currentNode == targetNode)
-                {
-                    pathSucces = true;
-                }
-
                 foreach (Noeud neighbour in grid.getNeighbourgs(currentNode))
                 {
                     if (!neighbour.walkable || closeSet.Contains(neighbour))
@@ -74,6 +59,20 @@ public class DisjktraPathfinding : MonoBehaviour
                         }
                     }
                 }
+                if (currentNode == targetNode)
+                {
+                    pathSucces = true;
+                }
+                openSet.Remove(currentNode);
+                closeSet.Add(currentNode);
+                for (int i = 1; i < openSet.Count; i++)
+                {
+                    if (openSet[i].distance < currentNode.distance)
+                    {
+                        currentNode = openSet[i];
+                    }
+                }
+
             }
         }
         yield return null;

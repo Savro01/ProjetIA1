@@ -15,7 +15,7 @@ public class Noeud {
     public Noeud parent;
 
     //Disjktra algo
-    public int distance;
+    public int distance = 999999999;
 
     public Noeud(bool _walkable, Vector3 _worldPos, int _grixX, int _grixY) {
         walkable = _walkable;
