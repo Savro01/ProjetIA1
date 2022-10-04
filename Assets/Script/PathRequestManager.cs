@@ -33,12 +33,10 @@ public class PathRequestManager : MonoBehaviour
             isProcessingPath = true;
             if (disjktraPathfinding.active)
             {
-                Debug.Log("Disjktra");
                 disjktraPathfinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd);
             }
             else
             {
-                Debug.Log("Astar");
                 astarPathfinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd);
             }
 

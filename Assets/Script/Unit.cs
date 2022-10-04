@@ -12,7 +12,7 @@ public class Unit : MonoBehaviour
     float timer = 0;
 
     void Update(){
-        float time = 0.05f;
+        float time = 0.15f;
         if (timer <= time)
             timer += Time.deltaTime;
 
@@ -32,7 +32,6 @@ public class Unit : MonoBehaviour
     }
 
     IEnumerator FollowPath() {
-        Debug.Log(path);
         Vector3 currentWaypoint = path[0];
 
         while(true){
