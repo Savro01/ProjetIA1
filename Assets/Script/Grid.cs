@@ -7,7 +7,7 @@ public class Grid : MonoBehaviour
     public bool displayGridGizmos;
     public LayerMask unwalkableMask;
     public Vector2 gridWorldSize;
-    public float nodeRadius;
+    public float nodeRadius = 0.5f;
     Noeud[,] grid;
 
     float nodeDiameter;
