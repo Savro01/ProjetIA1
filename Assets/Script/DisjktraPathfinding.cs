@@ -23,7 +23,7 @@ public class DisjktraPathfinding : MonoBehaviour
 
     IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
     {
-        Vector3[] waypoints = new Vector3[0];
+        List<Noeud> path = new List<Noeud>();
         bool pathSucces = false;
 
         Noeud startNode = grid.NodeFromWorldPoint(startPos);
@@ -78,12 +78,12 @@ public class DisjktraPathfinding : MonoBehaviour
         yield return null;
         if (pathSucces)
         {
-            waypoints = RetracePath(startNode, targetNode);
+            path = RetracePath(startNode, targetNode);
         }
-        requestManager.FinishedProcessingPath(waypoints, pathSucces);
+        requestManager.FinishedProcessingPath(path, pathSucces);
     }
 
-    Vector3[] RetracePath(Noeud startNode, Noeud endNode)
+    List<Noeud> RetracePath(Noeud startNode, Noeud endNode)
     {
         List<Noeud> path = new List<Noeud>();
         Noeud currentNode = endNode;
@@ -93,26 +93,8 @@ public class DisjktraPathfinding : MonoBehaviour
             path.Add(currentNode);
             currentNode = currentNode.parent;
         }
-        Vector3[] waypoints = SimplifyPath(path);
-        Array.Reverse(waypoints);
-        return waypoints;
-    }
-
-    Vector3[] SimplifyPath(List<Noeud> path)
-    {
-        List<Vector3> waypoints = new List<Vector3>();
-        Vector2 directionOld = Vector2.zero;
-
-        for (int i = 1; i < path.Count; i++)
-        {
-            Vector2 directionNew = new Vector2(path[i - 1].gridX - path[i].gridX, path[i - 1].gridY - path[i].gridY);
-            if (directionNew != directionOld)
-            {
-                waypoints.Add(path[i].worldPosition);
-            }
-            directionOld = directionNew;
-        }
-        return waypoints.ToArray();
+        path.Reverse();
+        return path;
     }
 
     int GetDistance(Noeud nodeA, Noeud nodeB)

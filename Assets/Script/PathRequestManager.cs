@@ -21,7 +21,7 @@ public class PathRequestManager : MonoBehaviour
         disjktraPathfinding = GetComponent<DisjktraPathfinding>();
     }
 
-    public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback){
+    public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<List<Noeud>, bool> callback){
         PathRequest newRequest = new PathRequest(pathStart, pathEnd, callback);
         instance.pathRequestQueue.Enqueue(newRequest);
         instance.TryProcessNext();
@@ -43,7 +43,7 @@ public class PathRequestManager : MonoBehaviour
         }
     }    
 
-    public void FinishedProcessingPath(Vector3[] path, bool success){
+    public void FinishedProcessingPath(List<Noeud> path, bool success){
         currentPathRequest.callback(path, success);
         isProcessingPath = false;
         TryProcessNext();
@@ -52,9 +52,9 @@ public class PathRequestManager : MonoBehaviour
     struct PathRequest{
         public Vector3 pathStart;
         public Vector3 pathEnd;
-        public Action<Vector3[], bool> callback;
+        public Action<List<Noeud>, bool> callback;
 
-        public PathRequest(Vector3 _start, Vector3 _end, Action<Vector3[], bool> _callback){
+        public PathRequest(Vector3 _start, Vector3 _end, Action<List<Noeud>, bool> _callback){
             pathStart = _start;
             pathEnd = _end;
             callback = _callback;

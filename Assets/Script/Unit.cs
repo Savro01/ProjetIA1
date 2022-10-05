@@ -6,7 +6,7 @@ public class Unit : MonoBehaviour
 {
     public Transform target;
     float speed = 5;
-    Vector3[] path;
+    List<Noeud> path;
     int targetIndex;
 
     float timer = 0;
@@ -23,7 +23,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public void onPathFound(Vector3[] newPath, bool pathSuccesful){
+    public void onPathFound(List<Noeud> newPath, bool pathSuccesful){
         if(pathSuccesful){
             path = newPath;
             StopCoroutine("FollowPath");
@@ -32,34 +32,27 @@ public class Unit : MonoBehaviour
     }
 
     IEnumerator FollowPath() {
-        Vector3 currentWaypoint = path[0];
+        Noeud currentWaypoint = path[0];
 
         while(true){
-            if(transform.position == currentWaypoint){
+            if(transform.position == currentWaypoint.worldPosition){
                 targetIndex++;
-                if(targetIndex >= path.Length){
+                if(targetIndex >= path.Count){
                     yield break;
                 }
                 currentWaypoint = path[targetIndex];
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.worldPosition, speed * Time.deltaTime);
             yield return null;
         }
     }
 
     public void OnDrawGizmos(){
         if(path != null){
-            for(int i = targetIndex; i < path.Length; i++){
+            for(int i = targetIndex; i < path.Count; i++){
                 Gizmos.color = Color.black;
-                Gizmos.DrawCube(path[i], Vector3.one);
-
-                if(i == targetIndex){
-                    Gizmos.DrawLine(transform.position, path[i]);
-                }
-                else{
-                    Gizmos.DrawLine(path[i-1], path[i]);
-                }
+                Gizmos.DrawCube(path[i].worldPosition, Vector3.one * (1 - .1f));
             }
         }
     }
