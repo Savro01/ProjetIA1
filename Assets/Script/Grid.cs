@@ -25,7 +25,7 @@ public class Grid : MonoBehaviour
         //CreateGrid();
     }
 
-    void CreateGrid(){
+    public void CreateGrid(){
         grid = new Noeud[gridSizeX,gridSizeY];
         Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x/2 - Vector3.forward * gridWorldSize.y/2;
 
