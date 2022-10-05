@@ -7603,7 +7603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c8291d895a4b024088ba19c9a8532d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayGridGizmos: 1
+  displayGridGizmos: 0
   unwalkableMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -7636,7 +7636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83feb420cf64bbd408e99137d4ee650b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
 --- !u!114 &2078771418
 MonoBehaviour:
   m_ObjectHideFlags: 0
